@@ -1,0 +1,326 @@
+<html>
+	<head>
+		<meta charset="UTF-8"></meta>
+	
+		<title>Turbo Meme Generator Template Designer</title>
+		
+		<script src="script.js"></script>
+		
+		<style>
+			@keyframes fade-out
+			{
+				from
+				{
+					opacity: 1;
+				}
+				
+				to
+				{
+					opacity: 0;
+				}
+			}
+		
+			body
+			{
+				margin: 0;
+				padding: 0;
+				
+				background-color: #111;
+				
+				color: white;
+				font-family: sans-serif;
+				
+				text-align: justify;
+			}
+			
+			h1, h2, h3, h4, .h3
+			{
+				font-weight: normal;
+			
+				letter-spacing: 1px;
+			}
+			
+			ul
+			{
+				padding: 0 0 0 1.25em;
+				
+			}
+			
+			h1
+			{
+				margin: 0;
+				
+				padding: 0 0 0.125em 0;
+				
+				border-bottom: 0.06125em solid #FFF;
+			}
+			
+			h2
+			{
+				margin: 0.5em 0 0 0;
+			}
+			
+			h3, h4, .h3
+			{
+				text-decoration: underline;
+				margin: 0;
+			}
+			
+			input[type=radio]
+			{
+				position: relative;
+				
+				float: right;
+				
+				left: -75%;
+			}
+			
+			textarea,
+			input[type=text]
+			{
+				width: 100%;
+				
+				resize: none;
+			}
+			
+			#div-toolbar
+			{
+				margin: 0.125em 0 0;
+				padding: 1em 0;
+				
+				border-top: 1px solid white;
+				border-bottom: 1px solid white;
+			}
+			
+			#div-ui
+			{
+				position: fixed;
+				
+				right: 0;
+				float: right;
+			
+				height: 100%;
+				width: 25em;
+				
+				background-color: #383838;
+				border: 6px solid #282828;
+				box-sizing: border-box;
+				
+				z-index: 1;
+				
+				padding: 0.5em;
+				
+				overflow: auto;
+			}
+			
+			p, form
+			{
+				margin: 0 0 1em;
+			}
+			
+			#dropbox
+			{
+				width: 100%;
+				height: 100%;
+				
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				
+				background-color: green;
+				opacity: 0;
+				
+				transition: opacity ease-in-out 250ms;
+			}
+		
+			#div-canvas
+			{
+				width: auto;
+				height: 100%;
+				
+				margin-right: 25em;
+				
+				overflow: auto;
+				
+				z-indwex: 1;
+				
+				pointer-events: auto;
+				
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			#img
+			{
+				object-fit: contain;
+				
+				opacity: 0;
+				
+				z-index: 0;
+				
+				pointer-events: none;
+				
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			div.entry-ui
+			{
+				border-top: 1px solid white;
+				border-bottom: 1px solid white;
+				
+				margin: 0.125em 0;
+				
+				overflow: visible;
+			}
+			
+			.h3
+			{
+				font-size: 1.17em;
+			}
+			
+			.min
+			{
+				font-style: italic;
+				font-size: 0.85em;
+			}
+			
+			.buttonP
+			{
+				margin: 1em 0 0 0;
+			}
+			
+			.button
+			{
+				display: inline-block;
+			
+				cursor: default;
+				
+				background-color: #484848;
+				border: 1px solid white;
+				padding: 0.5em;
+				
+				font-style: italic;
+			}
+			
+			.button:hover
+			{
+				cursor: pointer;
+				background-color: #555;
+			}
+			
+			.button:active
+			{
+				background-color: #666;
+			}
+			
+			.error
+			{
+				display: block;
+				
+				width: auto;
+				height: auto;
+				
+				padding: 0.25em;
+				
+				max-width: 18em;
+				
+				background-color: #CF0000;
+				
+				border-width: 1px;
+				border-style: solid;
+				border-color: #FF7070;
+				
+				z-index: 5;
+				
+				text-align: left;
+				
+				animation: fade-out ease-in 2s;
+				animation-delay: 8s;
+				
+				visibility: visible;
+			}
+			
+			.vis,
+			.set
+			{
+				position: absolute;
+				
+				background-color: rgba(255, 0, 0, 0.5);
+			}
+			
+			.vis
+			{
+				animation: fade-out ease-in 1s;
+				animation-delay: 2s;	
+				z-index: 5;
+			}
+			
+			.set
+			{
+				transition: opacity 1s ease-in-out, background-color 250ms ease-in-out;
+			}
+			
+			#debug
+			{
+				position: fixed;
+				
+				top: 1em;
+				left: 1em;
+				
+				width: 5em;
+				height: auto;
+			}
+			
+			#debug > textarea
+			{
+				height: 1.5em;
+			}
+		</style>
+	</head>
+	
+	<body onload="main();">
+		<div id="div-ui">
+			<h1>Turbo Meme Generator<br>Template Designer</h1>
+			
+			<div id="div-toolbar">
+				<span class="button" id="export" onclick="exportTemplate();">Exoprt!</span><span class="button" id="add" onclick="addDiv(blankEntry());">Add Entry</span>
+			</div>
+			
+			<div id="first">
+				<span class="min">
+					<p>
+						Drop a template image into the region on the left!
+					</p>
+					<p>
+						A few notes:
+						<ul>
+							<li>
+								Please do not resize the page while working; zoom in to an optimal level for yourself before working. Though things are mostly functional with zooming to the point where nothing will fatally break, it's just best to play it safe.
+							</li>
+							<li>
+								Please excuse and perhaps even reoprt bugs. (TODO: put link to reporting bugs)
+							</li>
+						</ul>
+					</p>
+				</span>
+			</div>
+			
+			<div id="entries">
+			</div>
+		</div>
+		
+		<div id="div-canvas">
+			<div id="dropbox"></div>
+			<img id="img" src=""></img>
+		</div>
+	</body>
+</html>
