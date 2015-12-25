@@ -298,7 +298,7 @@ function divFromEntry(inputEntry, entryIndex)
 	leniencyP.innerHTML = "Leniency ";
 	
 	var leniencyAbbr = document.createElement("abbr");
-	leniencyAbbr.title = "If checked, a simage will qualify for the entry if at least 1 tag matches. If left unchecked, the simage only qualifies if all tags match.";
+	leniencyAbbr.title = "If left unchecked, a simage will qualify for the entry if at least 1 tag matches. If checked, the simage only qualifies if all tags match.";
 	leniencyAbbr.innerHTML = "(?)";
 	
 	leniencyP.appendChild(leniencyAbbr);
