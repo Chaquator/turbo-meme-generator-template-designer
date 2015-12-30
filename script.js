@@ -662,7 +662,7 @@ function divFromEntry(inputEntry, entryIndex)
 	
 	var colorNoneRadio = document.createElement("input");
 	colorNoneRadio.id = "entry-" + entryIndex + "-none";
-	colorNoneRadio.setAttribute("value", "none");
+	colorNoneRadio.setAttribute("value", "no");
 	colorNoneRadio.type = "radio";
 	colorNoneRadio.name = "color";
 	
