@@ -63,7 +63,7 @@ function Entry(acceptedTags, tagLenient, blacklist, ulCorner, drCorner, colorize
 			arr.pop();
 		}
 		
-		if(arr[5] == "none" && arr[6] != "same")
+		if(arr[5] == "no" && arr[6] != "same")
 		{
 			arr.pop();
 		}
